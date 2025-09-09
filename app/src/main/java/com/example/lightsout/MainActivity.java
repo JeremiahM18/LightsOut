@@ -15,45 +15,71 @@ public class MainActivity extends AppCompatActivity {
     private GridLayout grid;
     private boolean cellState [][];
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    View.OnClickListener buttonListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Button current = (Button) v;
+            for (int i = 0; i < grid.getChildCount(); i++) {
+                Button gridButton = (Button) grid.getChildAt(i);
 
-        cellState = new boolean[][]{{true, true, true}, {true, true, true}, {true, true, true}};
+                if (gridButton == current) {
+                    // Find the button's row and col
+                    int row = i / GRID_SIZE;
+                    int col = i % GRID_SIZE;
 
-        setContentView(R.layout.activity_main);
-        grid = findViewById(R.id.light_grid);
+                    if (cellState[row][col] == true) {
+                        cellState[row][col] = false;
+                    } else {
+                        cellState[row][col] = true;
+                    }
+                }
+            }
+            recolor();
+        }
+    };
 
-//      randomize();
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
 
-        recolor();
-    }
+            cellState = new boolean[][]{{true, true, true}, {true, true, true}, {true, true, true}};
 
-    public void recolor(){
-        for (int i = 0; i < grid.getChildCount(); i++) {
-            Button gridButton = (Button) grid.getChildAt(i);
+            setContentView(R.layout.activity_main);
+            grid = findViewById(R.id.light_grid);
 
-            // Find the button's row and col
-            int row = i / GRID_SIZE;
-            int col = i % GRID_SIZE;
+            randomize();
 
-            if (cellState[row][col] == true) {
-                gridButton.setBackgroundColor(getColor(R.color.blue_500));
-            } else {
-                gridButton.setBackgroundColor(getColor(R.color.black));
+            recolor();
+
+            for (int i = 0; i < grid.getChildCount(); i++) {
+                Button currButton = (Button) grid.getChildAt(i);
+                currButton.setOnClickListener(buttonListener);
             }
         }
-    }
 
-    public void randomize(){
-        Random random = new Random();
-        for(int i =0; i< GRID_SIZE; i++){
-            for(int j =0; j< GRID_SIZE; j++){
-                cellState[i][j] = random.nextBoolean();
+        public void recolor() {
+            for (int i = 0; i < grid.getChildCount(); i++) {
+                Button gridButton = (Button) grid.getChildAt(i);
+
+                // Find the button's row and col
+                int row = i / GRID_SIZE;
+                int col = i % GRID_SIZE;
+
+                if (cellState[row][col] == true) {
+                    gridButton.setBackgroundColor(getColor(R.color.blue_500));
+                } else {
+                    gridButton.setBackgroundColor(getColor(R.color.black));
+                }
             }
         }
-    }
 
-
+        public void randomize() {
+            Random random = new Random();
+            for (int i = 0; i < GRID_SIZE; i++) {
+                for (int j = 0; j < GRID_SIZE; j++) {
+                    cellState[i][j] = random.nextBoolean();
+                }
+            }
+        }
 
 }
