@@ -1,4 +1,10 @@
 <resources>
+    <string name="app_name">LightsOut</string>
     <string name="header">Lights Jeremiah</string>
-    <string name="counterScore">Score: </string>
+    <string name="score_0">Score: 0</string>
+    <string name="score_format">Score: %1$d></string>
+    <string name="reset">Reset</string>
+    <string name="randomize">Randomize</string>
+    <string name="you_win">You Win!</string>
+    <string name="play_again">Play Again?</string>
 </resources>
