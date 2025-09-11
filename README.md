@@ -1,5 +1,12 @@
-Jeremiah McDonald
+** Author:** Jeremiah McDonald
 
-1. A button to turn all the lights off 
+# Lights Out App
 
-2. A button to randomize the lights is Method on li
+A simple Android app where you turn on the lights to win.
+
+## Features
+- **3x3 grid** of lights (buttons)
+- **Score counter** that tracks buttons pushed
+- **Reset** button that turn all the lights off
+- **Randomize** button that randomizes the lights and colors
+- **Win Screen** that appears when all the lights are On.
